@@ -92,12 +92,17 @@ snippet defd
 	def ${2:name} do
 		${0}
 	end
+snippet defs
+	@spec ${1:name}(${2:arg types}) :: ${3:no_return}
+	def $1(${4:args}) do
+		${0}
+	end
 snippet defsd
 	@doc """
 	${1:doc string}
 	"""
-	@spec ${2:name} :: ${3:no_return}
-	def ${2} do
+	@spec ${2:name}(${3:arg types}) :: ${4:no_return}
+	def $2(${5:args}) do
 		${0}
 	end
 snippet defim
@@ -126,14 +131,22 @@ snippet doc
 	@doc """
 	${0}
 	"""
-snippet im
-	@impl true
+snippet docs
+	@doc ~S"""
+	${0}
+	"""
 snippet docf
 	@doc false
+snippet im
+	@impl true
 snippet fn
 	fn ${1:args} -> ${0} end
 snippet mdoc
 	@moduledoc """
+	${0}
+	"""
+snippet mdocs
+	@moduledoc ~S"""
 	${0}
 	"""
 snippet mdocf
@@ -144,13 +157,17 @@ snippet rec
 			${0}
 	end
 snippet req
-	require ${0:module_name}
+	require ${0:Logger}
 snippet imp
 	import ${0:module_name}
 snippet ali
 	alias ${0:module_name}
 snippet test
 	test "${1:test name}" do
+		${0}
+	end
+snippet testc
+	test "${1:test_name}", ctx do
 		${0}
 	end
 snippet testa
@@ -176,6 +193,8 @@ snippet try try .. rescue .. end
 snippet pry
 	require IEx; IEx.pry
 	${0}
+snippet ppry
+	|> (fn x -> require IEx; IEx.pry; x end).()${0}
 snippet qu
 	quote do
 		${1}
@@ -183,6 +202,8 @@ snippet qu
 snippet beh
 	@behaviour ${1:Mix.Task}
 	${0}
+snippet p
+	|> ${0}
 snippet >e pipe to each
 	|> Enum.each(fn ${1} -> ${0} end)
 snippet >m pipe to map
@@ -226,3 +247,12 @@ snippet genserver: basic genserver structure
 
 	@impl true
 	def init(state), do: {:ok, state}
+snippet impl
+	@impl true
+	def ${1:name} do
+		${0}
+	end
+snippet wl word list
+	~w(${0})
+snippet al atom list
+	~w(${0})a
